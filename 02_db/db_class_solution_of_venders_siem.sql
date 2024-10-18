@@ -24,6 +24,7 @@ DROP TABLE IF EXISTS `solution_of_venders_siem`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `solution_of_venders_siem` (
   `siem_id` int NOT NULL AUTO_INCREMENT,
+  `solution_name` varchar(255) DEFAULT NULL,
   `solution_of_venders` varchar(255) NOT NULL,
   PRIMARY KEY (`siem_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -35,7 +36,7 @@ CREATE TABLE `solution_of_venders_siem` (
 
 LOCK TABLES `solution_of_venders_siem` WRITE;
 /*!40000 ALTER TABLE `solution_of_venders_siem` DISABLE KEYS */;
-INSERT INTO `solution_of_venders_siem` VALUES (1,'MaxPatrol SIEM'),(2,'Kaspersky Unified Monitoring and Analysis Platform (KUMA)');
+INSERT INTO `solution_of_venders_siem` VALUES (1,'pt1','MaxPatrol SIEM'),(2,'k1','Kaspersky Unified Monitoring and Analysis Platform (KUMA)');
 /*!40000 ALTER TABLE `solution_of_venders_siem` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -48,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-14 14:38:30
+-- Dump completed on 2024-10-18 19:05:55

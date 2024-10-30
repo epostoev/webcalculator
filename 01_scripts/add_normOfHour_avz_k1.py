@@ -1,15 +1,18 @@
 import pymysql
 from config import host, user, password, db_name
 
-def add_solution_of_venders_avz(cursor):
-    solution_name = input("Введите название solution: ")
-    solution_of_venders = input("Введите название venders: ")
+def add_docs(cursor):
+    docs_name = input("Введите название типа рар-ой док-и: ")
+    trp = input("trp (0/1) = ")
+    ep = input("ep (0/1) = ")
+    presale = input("presale (0/1) = : ")
+    tp = input("tp (0/1) = : ")
 
     insert_query = """
-    INSERT INTO solution_of_venders_avz (solution_name, solution_of_venders )
-    VALUES (%s, %s)
+    INSERT INTO docs (docs_name, trp, ep, presale, tp)
+    VALUES (%s, %s, %s, %s, %s)
     """
-    cursor.execute(insert_query, (solution_name, solution_of_venders))
+    cursor.execute(insert_query, (docs_name, trp, ep, presale, tp))
     print("Запись добавлена.")
 
 try:
@@ -31,17 +34,20 @@ try:
 
         # Создаем таблицу с указанными полями, если она не существует
         create_table_query = """
-        CREATE TABLE IF NOT EXISTS solution_of_venders_avz (
-            avz_id INT AUTO_INCREMENT PRIMARY KEY,
-            vendor_name VARCHAR(255) NOT NULL,
-            solution_of_venders VARCHAR(255) NOT NULL
+        CREATE TABLE IF NOT EXISTS docs (
+            docs_id INT AUTO_INCREMENT PRIMARY KEY,
+            docs_name VARCHAR(255) NOT NULL,
+            trp VARCHAR(255) NOT NULL,
+            ep VARCHAR(255),
+            presale VARCHAR(255),
+            tp VARCHAR(255)
         )
         """
         cursor.execute(create_table_query)
 
         # Добавляем записи интерактивно
         while True:
-            add_solution_of_venders_avz(cursor)
+            add_docs(cursor)
             connection.commit()  # Подтверждаем изменения
 
             another = input("Хотите добавить еще одну запись? (да/нет): ").strip().lower()

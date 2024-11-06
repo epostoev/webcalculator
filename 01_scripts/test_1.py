@@ -10,12 +10,11 @@ sheet = wb['АВЗ АСУТП']
 # Создаем пустой список для хранения словарей
 data_dict = []
 
-# Читаем диапазоны ячеек A5:A105, B5:B105, C5:C105 для значений docs_name, Complexity и дополнительных значений из B
+# Читаем диапазоны ячеек A5:A105, C5:C105 для значений docs_name и Complexity
 docs_name_values = [row[0].value for row in sheet['A5:A105']]  # Извлекаем значения из столбца A
 complexity_values = [row[0].value for row in sheet['C5:C105']]  # Извлекаем значения из столбца C
-additional_values = [row[0].value for row in sheet['B5:B105']]  # Извлекаем значения из столбца B
 
-# Обрабатываем объединенные ячейки в столбцах A, B и C, чтобы распространить значение на все объединенные строки
+# Обрабатываем объединенные ячейки в столбцах A и C, чтобы распространить значение на все объединенные строки
 for i in range(1, len(docs_name_values)):
     if docs_name_values[i] is None:
         docs_name_values[i] = docs_name_values[i - 1]  # Если текущая ячейка пустая (объединенная), копируем значение из предыдущей строки
@@ -23,10 +22,6 @@ for i in range(1, len(docs_name_values)):
 for i in range(1, len(complexity_values)):
     if complexity_values[i] is None:
         complexity_values[i] = complexity_values[i - 1]  # Если текущая ячейка пустая (объединенная), копируем значение из предыдущей строки
-
-for i in range(1, len(additional_values)):
-    if additional_values[i] is None:
-        additional_values[i] = additional_values[i - 1]  # Если текущая ячейка пустая (объединенная), копируем значение из предыдущей строки
 
 # Читаем диапазон ячеек D5:F105
 for i, row in enumerate(sheet['D5:F105']):
@@ -53,14 +48,9 @@ for i, row in enumerate(sheet['D5:F105']):
     # Получаем значение из C5:C105 для текущей строки
     complexity = complexity_values[i]  # Получаем соответствующее значение из столбца C
 
-    # Получаем значение из B5:B105 для текущей строки и добавляем его в скобки в поле Complexity
-    additional_value = additional_values[i]  # Получаем соответствующее значение из столбца B
-    if additional_value:
-        complexity = f"{complexity} ({additional_value})"  # Добавляем значение из столбца B в скобках
-
     # Формируем строку в нужном формате для словаря
     row_dict = {
-        'Complexity': str(complexity),  # Добавляем значение из столбца C с дополнительным значением из B
+        'Complexity': str(complexity),  # Добавляем значение из столбца C
         'docs_name': str(docs_name),  # Преобразуем значение в строку для consistency
         'parametr_1': str(parametr_1),  # Преобразуем значение в строку
         'parametr_2': str(parametr_2),  # Преобразуем значение в строку

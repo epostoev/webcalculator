@@ -1,21 +1,35 @@
 import openpyxl
 
-# Открываем файл Excel
-file_path = '123.xlsm'
-wb = openpyxl.load_workbook(file_path, data_only=False)  # Важно установить data_only=False
+book = openpyxl.open("123.xlsm", read_only=True)
+sheet = book['АВЗ АСУТП']
+docs_name_values = []
+complexity_name_value = []
+additional_values = []
+parametr_1 = []
+parametr_2 = []
+parametr_3 = []
 
-# Получаем нужный лист
-sheet = wb['АВЗ АСУТП']
+print(sheet[1][0].value)
 
-# Открываем текстовый файл для записи
-with open('output.txt', 'w', encoding='utf-8') as file:
-    # Читаем диапазон ячеек D5:F105
-    for row in sheet['D5:F105']:
-        # Составляем строку с данными, разделёнными точкой с запятой
-        row_data = [str(cell.formula if hasattr(cell, 'formula') and cell.formula else cell.value) for cell in row]
-        row_str = ';'.join(row_data)
+for row in range(5, 106):
 
-        # Записываем строку в файл и добавляем новую строку
-        file.write(row_str + '\n')
+    docs_name_values.append(sheet[row][0].value)
+    complexity_name_value.append(sheet[row][1].value)
+    additional_values.append(sheet[row][2].value)
+    parametr_1.append(sheet[row][3].value)
+    parametr_2.append(sheet[row][4].value)
+    parametr_3.append(sheet[row][5].value)
 
-print("Данные успешно записаны в файл output.txt")
+for i in range(1, len(docs_name_values)):
+    if docs_name_values[i] is None:
+        docs_name_values[i] = docs_name_values[i - 1]
+
+for i in range(1, len(additional_values)):
+    if additional_values[i] is None:
+        additional_values[i] = additional_values[i -1]
+
+# Формируем строку в нужном формате для словаря
+
+
+print(docs_name_values)
+print(additional_values)

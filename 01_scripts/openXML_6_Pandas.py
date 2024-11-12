@@ -10,10 +10,10 @@ sheet = wb['АВЗ АСУТП']
 # Создаем пустой словарь для хранения данных
 data_dict = {}
 
-# Читаем диапазоны ячеек A5:A105, B5:B105, C5:C105 для значений docs_name, Complexity и дополнительных значений из B
-docs_name_values = [row[0].value for row in sheet['A5:A73']]  # Извлекаем значения из столбца A
-complexity_values = [row[0].value for row in sheet['C5:C73']]  # Извлекаем значения из столбца C
-additional_values = [row[0].value for row in sheet['B5:B73']]  # Извлекаем значения из столбца B
+# Читаем диапазоны ячеек A5:A67, B5:B67, C5:C67 для значений docs_name, Complexity и дополнительных значений из B
+docs_name_values = [row[0].value for row in sheet['A4:A67']]  # Извлекаем значения из столбца A
+complexity_values = [row[0].value for row in sheet['C4:C67']]  # Извлекаем значения из столбца C
+additional_values = [row[0].value for row in sheet['B4:B67']]  # Извлекаем значения из столбца B
 
 # Обрабатываем объединенные ячейки в столбцах A, B и C, чтобы распространить значение на все объединенные строки
 for i in range(1, len(docs_name_values)):
@@ -29,7 +29,7 @@ for i in range(1, len(additional_values)):
         additional_values[i] = additional_values[i - 1]  # Если текущая ячейка пустая (объединенная), копируем значение из предыдущей строки
 
 # Читаем диапазон ячеек D5:F105
-for i, row in enumerate(sheet['D5:F73']):
+for i, row in enumerate(sheet['D4:F67']):
     # Получаем значения для каждого столбца
     parametr_1 = str(row[0].formula if hasattr(row[0], 'formula') and row[0].formula else row[0].value)
     parametr_2 = str(row[1].formula if hasattr(row[1], 'formula') and row[1].formula else row[1].value)

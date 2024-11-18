@@ -1,6 +1,6 @@
--- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.40, for macos14 (arm64)
 --
--- Host: localhost    Database: db_class
+-- Host: 127.0.0.1    Database: db_class
 -- ------------------------------------------------------
 -- Server version	9.0.1
 
@@ -36,7 +36,7 @@ CREATE TABLE `solution_of_venders_avz` (
 
 LOCK TABLES `solution_of_venders_avz` WRITE;
 /*!40000 ALTER TABLE `solution_of_venders_avz` DISABLE KEYS */;
-INSERT INTO `solution_of_venders_avz` VALUES (1,'k1','Kaspersky Security для виртуальных и облачных сред'),(2,'k2','KICS for Nodes Windows'),(3,'k3','KICS for Nodes Linux'),(4,'k4','KES Windows'),(5,'k5','KES Linux'),(6,'pt1','PT MultiScanner'),(7,'dw1','Dr Web Security Suite'),(8,'dw2','Dr Web Industrial'),(10,'pt2','AlgoritmPostoev');
+INSERT INTO `solution_of_venders_avz` VALUES (1,'k1','Kaspersky Security для виртуальных и облачных сред'),(2,'k2','KICS for Nodes Windows'),(3,'k3','KICS for Nodes Linux'),(4,'k4','KES Windows'),(5,'k5','KES Linux'),(6,'pt1','PT MultiScanner'),(7,'dw1','Dr Web Security Suite'),(8,'dw2','Dr Web Industrial');
 /*!40000 ALTER TABLE `solution_of_venders_avz` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-30 17:38:07
+-- Dump completed on 2024-11-18 14:19:19

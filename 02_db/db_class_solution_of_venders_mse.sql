@@ -1,6 +1,6 @@
--- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.40, for macos14 (arm64)
 --
--- Host: localhost    Database: db_class
+-- Host: 127.0.0.1    Database: db_class
 -- ------------------------------------------------------
 -- Server version	9.0.1
 
@@ -24,6 +24,7 @@ DROP TABLE IF EXISTS `solution_of_venders_mse`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `solution_of_venders_mse` (
   `mse_id` int NOT NULL AUTO_INCREMENT,
+  `solution_name` varchar(255) DEFAULT NULL,
   `solution_of_venders` varchar(255) NOT NULL,
   PRIMARY KEY (`mse_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -35,7 +36,7 @@ CREATE TABLE `solution_of_venders_mse` (
 
 LOCK TABLES `solution_of_venders_mse` WRITE;
 /*!40000 ALTER TABLE `solution_of_venders_mse` DISABLE KEYS */;
-INSERT INTO `solution_of_venders_mse` VALUES (1,'Межсетевой экран UserGate'),(2,'Solar NGFW'),(3,'Континент 4'),(4,'ViPNet xFirewall');
+INSERT INTO `solution_of_venders_mse` VALUES (1,NULL,'Межсетевой экран UserGate'),(2,NULL,'Solar NGFW'),(3,NULL,'Континент 4'),(4,NULL,'ViPNet xFirewall');
 /*!40000 ALTER TABLE `solution_of_venders_mse` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -48,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-30 17:38:06
+-- Dump completed on 2024-11-25 15:23:50

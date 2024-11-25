@@ -1,6 +1,6 @@
--- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.40, for macos14 (arm64)
 --
--- Host: localhost    Database: db_class
+-- Host: 127.0.0.1    Database: db_class
 -- ------------------------------------------------------
 -- Server version	9.0.1
 
@@ -24,6 +24,7 @@ DROP TABLE IF EXISTS `solution_of_venders_pam`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `solution_of_venders_pam` (
   `pam_id` int NOT NULL AUTO_INCREMENT,
+  `solution_name` varchar(255) DEFAULT NULL,
   `solution_of_venders` varchar(255) NOT NULL,
   PRIMARY KEY (`pam_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -35,7 +36,7 @@ CREATE TABLE `solution_of_venders_pam` (
 
 LOCK TABLES `solution_of_venders_pam` WRITE;
 /*!40000 ALTER TABLE `solution_of_venders_pam` DISABLE KEYS */;
-INSERT INTO `solution_of_venders_pam` VALUES (1,'Solar SafeInspect'),(2,'Indeed Access Manager'),(3,'СКДПУ НТ');
+INSERT INTO `solution_of_venders_pam` VALUES (1,NULL,'Solar SafeInspect'),(2,NULL,'Indeed Access Manager'),(3,NULL,'СКДПУ НТ');
 /*!40000 ALTER TABLE `solution_of_venders_pam` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -48,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-30 17:38:06
+-- Dump completed on 2024-11-25 15:23:49

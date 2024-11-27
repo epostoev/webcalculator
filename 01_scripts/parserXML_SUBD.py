@@ -1,5 +1,6 @@
 import openpyxl
 import re
+import pymysql
 
 # Открываем файл Excel
 file_path = '123.xlsm'
@@ -31,14 +32,6 @@ for i, row in enumerate(sheet['D4:F67']):
     parametr_2 = str(row[1].value)
     parametr_3 = str(row[2].value)
 
-    # Обрабатываем специальные символы
-    if parametr_1 and 'D$3' in parametr_1:
-        parametr_1 = parametr_1.replace('D$3', 'user_parametr_1 =')
-    if parametr_2 and 'E$3' in parametr_2:
-        parametr_2 = parametr_2.replace('E$3', 'user_parametr_2 =')
-    if parametr_3 and 'F$3' in parametr_3:
-        parametr_3 = parametr_3.replace('F$3', 'user_parametr_3 =')
-
     docs_name = docs_name_values[i]
     complexity = complexity_values[i]
     additional_value = additional_values[i]
@@ -59,6 +52,17 @@ for i, row in enumerate(sheet['D4:F67']):
 # Функция для замены значений и добавления специальных символов
 def update_params_with_format(data_dict):
     for key, value in data_dict.items():
+        # Обрабатываем замену D$3, E$3, F$3 для всех параметров
+        for param in ['parametr_1', 'parametr_2', 'parametr_3']:
+            if param in value:
+                if 'D$3' in value[param]:
+                    value[param] = value[param].replace('D$3', 'user_parametr_1')
+                if 'E$3' in value[param]:
+                    value[param] = value[param].replace('E$3', 'user_parametr_2')
+                if 'F$3' in value[param]:
+                    value[param] = value[param].replace('F$3', 'user_parametr_3')
+
+        # Добавляем форматированные замены для D и E
         if 'parametr_3' in value:
             value['parametr_3'] = re.sub(
                 r'\bD\d+', f'@{key}$parametr_1', value['parametr_3']
@@ -80,13 +84,39 @@ def update_params_with_format(data_dict):
             value['parametr_2'] = re.sub(
                 r'\bE\d+', f'@{key}$parametr_2', value['parametr_2']
             )
+
+        # Заменяем "=" на "==" внутри скобок
+        for param in ['parametr_1', 'parametr_2', 'parametr_3']:
+            if param in value:
+                value[param] = re.sub(
+                    r'\(([^)]*?)=([^)]*?)\)',
+                    lambda m: f'({m.group(1)} == {m.group(2)})',
+                    value[param]
+                )
+                # Добавление пробелов вокруг "+"
+                value[param] = re.sub(
+                    r'(?<!\s)\+(?!\s)',  # Находит "+" без пробелов перед и после
+                    ' + ',               # Заменяет на " + "
+                    value[param]
+                )
+                # Добавление пробелов вокруг ","
+                value[param] = re.sub(
+                    r'(?<!\s)\,(?!\s)',  # Находит "," без пробелов перед и после
+                    ' , ',               # Заменяет на " , "
+                    value[param]
+                )
+                value[param] = re.sub(
+                    r'IF',  # Находит "," без пробелов перед и после
+                    ' IF ',               # Заменяет на " , "
+                    value[param]
+                )
+
+
 # Применяем функцию для обновления
 update_params_with_format(data_dict)
 
 # Вывод обновленного словаря
 print(data_dict)
-
-import pymysql
 
 # Подключение к базе данных MySQL
 connection = pymysql.connect(

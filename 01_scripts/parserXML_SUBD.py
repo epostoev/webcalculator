@@ -2,12 +2,18 @@ import openpyxl
 import re
 import pymysql
 
-# Открываем файл Excel
-file_path = '123.xlsm'
-wb = openpyxl.load_workbook(file_path, data_only=False)  # Важно установить data_only=False
-
-# Получаем нужный лист
-sheet = wb['АВЗ АСУТП']
+# Интерактивный ввод для выбора файла и листа
+file_path = input("Введите путь к файлу Excel (например, '123.xlsm'): ").strip()
+try:
+    wb = openpyxl.load_workbook(file_path, data_only=False)  # Открываем файл Excel
+    print(f"Файл {file_path} успешно открыт.")
+    print("Доступные листы:", wb.sheetnames)
+    sheet_name = input("Введите имя листа (например, 'АВЗ АСУТП'): ").strip()
+    sheet = wb[sheet_name]  # Получаем указанный лист
+    print(f"Лист {sheet_name} успешно открыт.")
+except Exception as e:
+    print(f"Ошибка при открытии файла или листа: {e}")
+    exit()
 
 # Создаем пустой словарь для хранения данных
 data_dict = {}

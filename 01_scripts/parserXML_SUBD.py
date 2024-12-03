@@ -76,12 +76,18 @@ def update_params_with_format(data_dict):
             value['parametr_3'] = re.sub(
                 r'\bE\d+', f'@{key}$parametr_2', value['parametr_3']
             )
+            value['parametr_3'] = re.sub(
+                r'\bF\d+', f'@{key}$parametr_3', value['parametr_3']
+            )
         if 'parametr_1' in value:
             value['parametr_1'] = re.sub(
                 r'\bD\d+', f'@{key}$parametr_1', value['parametr_1']
             )
             value['parametr_1'] = re.sub(
                 r'\bE\d+', f'@{key}$parametr_2', value['parametr_1']
+            )
+            value['parametr_1'] = re.sub(
+                r'\bF\d+', f'@{key}$parametr_3', value['parametr_1']
             )
         if 'parametr_2' in value:
             value['parametr_2'] = re.sub(
@@ -90,8 +96,10 @@ def update_params_with_format(data_dict):
             value['parametr_2'] = re.sub(
                 r'\bE\d+', f'@{key}$parametr_2', value['parametr_2']
             )
-
-        # Заменяем "=" на "==" внутри скобок
+            value['parametr_2'] = re.sub(
+                r'\bE\d+', f'@{key}$parametr_3', value['parametr_2']
+            )
+# Заменяем "=" на "==" внутри скобок
         for param in ['parametr_1', 'parametr_2', 'parametr_3']:
             if param in value:
                 value[param] = re.sub(

@@ -1,26 +1,39 @@
-import pandas as pd
-from tkinter import Tk
-from tkinter.filedialog import askopenfilename
-from tkinter.simpledialog import askstring
+# Подключение к базе данных MySQL
+connection = pymysql.connect(
+    host="localhost",
+    user="root",
+    password="159357QWzx",
+    database="db_class"
+)
 
-# Скрываем главное окно tkinter
-Tk().withdraw()
+try:
+    with connection.cursor() as cursor:
+        # Создание таблицы postoev_test
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS postoev_test (
+            id INT PRIMARY KEY,
+            complexity TEXT,
+            docs_name TEXT,
+            parametr_1 TEXT,
+            parametr_2 TEXT,
+            parametr_3 TEXT
+        )
+        """)
 
-# Открываем диалоговое окно для выбора файла
-file_path = askopenfilename(title="Выберите файл Excel", filetypes=[("Excel files", "*.xlsm;*.xlsx")])
+        # Запись данных из словаря в таблицу
+        for key, value in data_dict.items():
+            cursor.execute("""
+            INSERT INTO postoev_test (id, complexity, docs_name, parametr_1, parametr_2, parametr_3)
+            VALUES (%s, %s, %s, %s, %s, %s)
+            """, (key, value['сomplexity'], value['docs_name'], value['parametr_1'], value['parametr_2'], value['parametr_3']))
 
-if file_path:  # Проверяем, был ли выбран файл
-    # Запрашиваем название листа у пользователя
-    sheet_name = askstring("Введите название листа", "Введите название листа, который хотите распарсить:")
+        # Фиксация изменений
+        connection.commit()
 
-    try:
-        # Загружаем указанный лист
-        data = pd.read_excel(file_path, sheet_name=sheet_name)
+        # Проверка записей
+        cursor.execute("SELECT * FROM postoev_test")
+        rows = cursor.fetchall()
 
-        # Выводим первые несколько строк и информацию о DataFrame
-        print(data.head())
-        print(data.info())  # Покажет информацию о столбцах и их количестве
-    except Exception as e:
-        print(f"Произошла ошибка: {e}")
-else:
-    print("Файл не выбран.")
+finally:
+    # Закрытие соединения
+    connection.close()
